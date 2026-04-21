@@ -18,7 +18,8 @@ export default function ImageLightbox() {
 
   return (
     <div
-      onClick={() => setSrc(null)}
+      onClick={(e) => { e.stopPropagation(); e.preventDefault(); setSrc(null); }}
+      onTouchEnd={(e) => { e.stopPropagation(); e.preventDefault(); setSrc(null); }}
       style={{
         position: "fixed",
         inset: 0,

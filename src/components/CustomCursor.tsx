@@ -5,6 +5,8 @@ import { CRTRenderer } from "@/lib/crt-renderer";
 
 export default function CustomCursor() {
   useEffect(() => {
+    if (window.innerWidth < 480 || "ontouchstart" in window) return;
+
     const onMouseMove = (e: MouseEvent) => {
       if ((window as any).__crtRenderer) {
         const renderer = (window as any).__crtRenderer as CRTRenderer;

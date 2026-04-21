@@ -94,19 +94,14 @@ export default function CRTModel() {
     });
 
     const resize = () => {
-      const mob = window.innerWidth < 480;
-      const w = mob
-        ? Math.round(Math.min(window.innerWidth * 0.55, 280))
-        : Math.round(Math.min(window.innerWidth * 0.4, 500));
-      const h = mob
-        ? Math.round(Math.min(window.innerHeight * 0.35, 300))
-        : Math.round(Math.min(window.innerHeight * 0.55, 600));
+      if (window.innerWidth < 480) return;
+      const w = Math.round(Math.min(window.innerWidth * 0.4, 500));
+      const h = Math.round(Math.min(window.innerHeight * 0.55, 600));
       modelCanvas.width = w;
       modelCanvas.height = h;
       camera.aspect = w / h;
-      camera.fov = mob ? 38 : 35;
-      camera.position.y = mob ? 0.3 : 0.5;
-      camera.position.z = mob ? 4 : 4;
+      camera.fov = 35;
+      camera.position.y = 0.5;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
