@@ -28,7 +28,13 @@ export default function CRTModel() {
 
     const fov = isMobile ? 38 : 35;
     const camera = new THREE.PerspectiveCamera(fov, W / H, 0.1, 100);
-    camera.position.set(0, isMobile ? 0.3 : 0.5, isMobile ? 4 : 4);
+    const startAngle = Math.PI * 1.25; // starting rotation (~27°)
+    const dist = 4;
+    camera.position.set(
+      Math.sin(startAngle) * dist,
+      isMobile ? 0.3 : 0.5,
+      Math.cos(startAngle) * dist,
+    );
 
     const renderer = new THREE.WebGLRenderer({
       canvas: modelCanvas,
