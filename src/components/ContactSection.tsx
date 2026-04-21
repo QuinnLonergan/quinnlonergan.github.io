@@ -147,4 +147,5 @@ const fixedInput: React.CSSProperties = {
   fontFamily: "var(--font-mono)",
   padding: "14px 16px",
   pointerEvents: "all",
+  resize: "none",
 };
