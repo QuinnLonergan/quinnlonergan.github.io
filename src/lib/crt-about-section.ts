@@ -136,13 +136,13 @@ export class AboutSection implements CRTSection {
     ctx.font = `italic 400 ${clamp(20, vw(2.5), 28)}px ${FONT_SERIF}`;
     ctx.letterSpacing = "0px";
     ctx.fillStyle = COL.primary;
-    const profileText = "Full Stack Engineer with a proven track record scaling from Support to Software Engineer III, shipping high-impact features with JavaScript, React, Ruby, and Rails.";
+    const profileText = "Full Stack Engineer with a proven track record scaling from Support to Software Engineer III, shipping high-impact features with JavaScript, TypeScript, React, Ruby, and Rails.";
     curY = wrapText(ctx, profileText, leftX, curY, contentW, clamp(28, vw(3.5), 38));
     curY += 15;
 
     ctx.fillStyle = COL.accent;
     ctx.font = `italic 400 ${clamp(18, vw(2), 24)}px ${FONT_SERIF}`;
-    const profileText2 = "My Film and Comedy background shaped how I view engineering: it's an artistic practice that demands both technical rigor and thoughtful craftsmanship.";
+    const profileText2 = "My background in the arts shaped how I view engineering: it's an artistic practice that demands both technical rigor and thoughtful craftsmanship.";
     curY = wrapText(ctx, profileText2, leftX, curY, contentW, clamp(26, vw(3), 34));
     curY += 60;
 

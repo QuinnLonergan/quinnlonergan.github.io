@@ -166,7 +166,7 @@ export class HeroSection implements CRTSection {
       }
       if (line) { ctx.fillText(line, pad, qy); quoteBottom = qy + quoteSz; }
     } else {
-      ctx.fillText("Film background, engineering mind — code as craft.", pad, quoteY);
+      ctx.fillText("Frontend focused, tech neophile, film lover.                 Code as craft.", pad, quoteY);
     }
 
     if (!mobile) {
@@ -198,6 +198,16 @@ export class HeroSection implements CRTSection {
           mx = W - vw(5) - mw;
           my = screenY + this.height * 0.5 - mh * 0.45;
         }
+        ctx.globalAlpha = scrollFade * 0.15;
+        const glow = ctx.createRadialGradient(
+          mx + mw / 2, my + mh / 2, mw * 0.1,
+          mx + mw / 2, my + mh / 2, mw * 0.7,
+        );
+        glow.addColorStop(0, COL.accent);
+        glow.addColorStop(1, "transparent");
+        ctx.fillStyle = glow;
+        ctx.fillRect(mx - mw * 0.3, my - mh * 0.3, mw * 1.6, mh * 1.6);
+
         ctx.globalAlpha = scrollFade;
         ctx.drawImage(modelCanvas, mx, my, mw, mh);
         ctx.globalAlpha = 1;

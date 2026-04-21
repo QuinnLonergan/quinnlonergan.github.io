@@ -20,7 +20,7 @@ const projects: ProjectData[] = [
     title: "WildLog",
     index: "02",
     category: "Social Media",
-    description: "A nature-focused social platform where users share wildlife observations and experiences \u2014 from the local chipmunk to elephants on safari.",
+    description: "A nature-focused social platform where users share wildlife observations and experiences, from the local chipmunk to elephants on safari.",
     tech: ["React Native", "TypeScript", "Zustand", "PostgreSQL", "Firebase", "Docker", "Fastify"],
     images: Array.from({ length: 6 }, (_, i) => `/images/projects/wildlog/${i + 1}.jpeg`),
   },

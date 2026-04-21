@@ -111,7 +111,7 @@ export default function Home() {
       </h1>
 
       <blockquote className="hero__quote">
-        Film background, engineering mind — code as craft.
+        Frontend focused, tech neophile, film lover — code as craft.
       </blockquote>
 
       <span className="hero__vertical">

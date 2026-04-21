@@ -40,21 +40,21 @@ export default function CRTModel() {
     renderer.setPixelRatio(1); // offscreen, no DPR needed
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.6;
     renderer.setSize(W, H);
 
-    const ambient = new THREE.AmbientLight(0xc8a97e, 0.4);
+    const ambient = new THREE.AmbientLight(0xc8a97e, 0.7);
     scene.add(ambient);
 
-    const keyLight = new THREE.DirectionalLight(0xede5d8, 1.8);
+    const keyLight = new THREE.DirectionalLight(0xede5d8, 2.4);
     keyLight.position.set(-3, 4, 5);
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0xc8a97e, 0.6);
+    const fillLight = new THREE.DirectionalLight(0xc8a97e, 1.0);
     fillLight.position.set(3, 1, 3);
     scene.add(fillLight);
 
-    const rimLight = new THREE.DirectionalLight(0x8a7f72, 0.5);
+    const rimLight = new THREE.DirectionalLight(0x8a7f72, 0.8);
     rimLight.position.set(0, 2, -4);
     scene.add(rimLight);
 
