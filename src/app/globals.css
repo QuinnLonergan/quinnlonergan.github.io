@@ -23,6 +23,25 @@ body {
   background: var(--color-base);
 }
 
+.crt-model-hit {
+  top: 50%;
+  right: 5vw;
+  transform: translateY(-45%);
+  width: min(40vw, 500px);
+  height: min(55vh, 600px);
+}
+
+@media (max-width: 480px) {
+  .crt-model-hit {
+    top: 55%;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(55vw, 280px);
+    height: min(35vh, 300px);
+  }
+}
+
 .scanlines {
   position: fixed;
   top: 0;

@@ -108,8 +108,6 @@ export default function CRTModel() {
     window.addEventListener("resize", resize);
 
     const onScroll = () => {
-      const isMobile = window.innerWidth < 480;
-      if (isMobile) { hitArea.style.pointerEvents = "none"; return; }
       const vh = window.innerHeight;
       const progress = Math.min(1, window.scrollY / (vh * 0.6));
       hitArea.style.pointerEvents = progress > 0.8 ? "none" : "all";
@@ -149,16 +147,13 @@ export default function CRTModel() {
   return (
     <div
       ref={hitRef}
+      className="crt-model-hit"
       style={{
         position: "fixed",
-        top: "50%",
-        right: "5vw",
-        transform: "translateY(-45%)",
-        width: "min(40vw, 500px)",
-        height: "min(55vh, 600px)",
         zIndex: 101,
         pointerEvents: "all",
         cursor: "grab",
+        touchAction: "none",
       }}
     />
   );
