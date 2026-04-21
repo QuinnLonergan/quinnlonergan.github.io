@@ -1,0 +1,193 @@
+# Interface Design Rules
+# Inspired by: shader.se, awwwards.com/sites_of_the_day
+# Standard: Award-level creative frontend. Not a template. Not a component library demo.
+
+---
+
+## The Prime Directive
+
+Every screen must have a signature. One thing that makes it unmistakably itself.
+Before writing a single line of code, name it:
+"The signature of this UI is: ___________"
+
+If you cannot fill that blank with something specific, you are not ready to build.
+
+---
+
+## Before Writing Any Code
+
+1. Check if `.interface-design/system.md` exists.
+   - If YES: load it, state active direction, proceed.
+   - If NO: run the Design Direction Checkpoint below.
+
+2. **Design Direction Checkpoint**
+   State out loud:
+   - The signature (see above)
+   - Depth strategy: borders-only / subtle shadows / layered elevation / flat
+   - Motion personality: none / subtle / expressive / cinematic
+   - Typography role: supporting / structural / dominant / the hero
+   - Color temperature: warm / cold / neutral / monochrome + one accent
+   - Spatial language: dense / balanced / generous / extreme whitespace
+   - The one Awwwards-level site this is most spiritually similar to
+
+   Wait for "y" before writing any code.
+
+3. **Per-component checkpoint**
+   Before each new component, state the specific tokens: spacing, type scale,
+   depth treatment, motion behavior.
+
+---
+
+## Typography — Treat It Like a Design Element
+
+Typography on award-winning sites does structural work, not just labeling.
+
+- Headlines must be large. Uncomfortably large. Try clamp(3rem, 10vw, 9rem).
+- Use variable fonts where possible — weight, width, optical size.
+- Mix weights intentionally: ultra-heavy display + light body is a system.
+- Tracking on uppercase labels: 0.15em–0.25em minimum.
+- Line height on large type: 0.9–1.05 (tighter than you think).
+- Never use system fonts for display text. Pick a Google Font or variable font
+  that has personality. Name it in the direction checkpoint.
+- Type can be a texture: large background letterforms, oversized numbers,
+  masked text reveals — use these before reaching for decorative graphics.
+
+---
+
+## Color — Restraint With One Moment of Intensity
+
+Award sites rarely use many colors. They use few colors with total commitment.
+
+- Pick a foundation: true black (#0a0a0a), warm off-white (#f5f0eb),
+  deep navy, slate, or bone. Not "background: white", not "bg-gray-100".
+- Pick ONE accent. Not two. Make it electric against the foundation.
+  Good examples: acid green on black, raw amber on near-white, bone on black.
+- Semantic color only for functional elements (errors, success). Not decoration.
+- Gradients only when they serve the spatial narrative (depth, light source).
+  Never gradient-as-decoration.
+- If using dark mode: deep surfaces have subtle warmth or coolness, 
+  never pure neutral gray stacks.
+
+---
+
+## Motion — The Invisible Layer That Separates Good From Great
+
+Without motion, a site is a poster. With it, it breathes.
+
+- Every page entrance: elements should arrive, not appear.
+  Minimum: staggered fade + translate on load (GSAP or CSS).
+- Scroll behavior: at least one element that responds to scroll position.
+  Parallax text, pinned sections, horizontal scroll, progress-driven opacity.
+- Hover states are micro-stories: don't just change color. Change scale +
+  color + a secondary element simultaneously.
+- Use CSS custom properties to drive animation values from JS for
+  cursor-reactive effects (magnetic buttons, cursor trails, spotlight).
+- Implement with: GSAP (preferred), Framer Motion, or CSS @keyframes.
+  Never use transition: all.
+
+---
+
+## Layout — Break the Grid Intentionally
+
+Generic AI UI uses 12-column grids with equal gutters everywhere.
+Award-level work knows when to destroy the grid for effect.
+
+- Establish a grid first (CSS Grid, named areas). Then intentionally violate
+  it in 1–2 places: a bleed element, an oversized type block, an asymmetric
+  split.
+- Use extreme aspect ratios for visual interest: 16:9, 21:9, 1:2 panels.
+- Whitespace is active, not empty. Large whitespace = presence, not laziness.
+- Horizontal scroll sections for portfolios/carousels — not vertical grids.
+- Overlapping elements create depth without shadows: z-index as a design tool.
+- Consider full-viewport sections that each tell one story (scroll-snapped
+  or scroll-triggered, like shader.se).
+
+---
+
+## Texture & Depth — Without Defaulting to Shadows
+
+Shadows are the lazy path to depth. Award sites use:
+
+- Grain/noise overlays (SVG feTurbulence or CSS noise) at 2–5% opacity
+  for tactility.
+- Subtle mesh or gradient backgrounds as an atmospheric layer.
+- Glass morphism only when it has a real surface behind it — not floating
+  glass over white.
+- Border as surface edge: 1px border at 8–12% opacity defines a plane
+  without drop shadows.
+- Background canvas elements: WebGL, Three.js, or even pure CSS for
+  ambient motion (particle fields, shader gradients, flowing meshes).
+  If the project allows it, suggest and implement a canvas background.
+
+---
+
+## Interactions — Every Control Is a Crafted Object
+
+- Buttons are not rectangles with text. They have:
+  - A specific height (not auto-height from padding alone)
+  - A hover state with motion (scale 1.02–1.04 + color shift)
+  - An active/press state (scale 0.97)
+  - Optional: magnetic pull toward cursor within 60px radius
+- Inputs have a focus state that goes beyond outline: border brightens,
+  label lifts, background shifts.
+- Links in body text: underline as animation, not decoration.
+  Slide-in underline on hover (scaleX from 0 to 1).
+- Cursor customization when appropriate: hide default cursor, build a
+  custom circle cursor that reacts to hoverable elements.
+
+---
+
+## Banned Defaults
+
+Do not use any of these without explicitly naming why and getting approval:
+
+- `bg-white` or `background: white` as a page background
+- Tailwind blue (`blue-500`, `blue-600`) as primary action color
+- `rounded-full` on rectangular buttons
+- Box shadows from Tailwind defaults (`shadow-md`, `shadow-lg`)
+- `transition: all`
+- Equal-column CSS grid as default layout
+- Identical internal structure for different card types
+- `from-blue-500 to-purple-600` gradients
+- Hero section with H1 + subheading + two buttons + hero image (the template)
+- Navbar with logo left, links right, CTA button — without any typographic
+  or motion treatment that makes it feel designed
+- Footer as a dark box with 4 link columns
+
+---
+
+## The Self-Audit (Run Before Calling Anything Done)
+
+Before presenting the result, answer these:
+
+1. Does this have a signature? Can I name it?
+2. Would this look at home on awwwards.com/websites/sites_of_the_day/ ?
+3. What's the first thing your eye goes to? Is that intentional?
+4. Does anything move? Does the motion add meaning?
+5. Is the typography doing structural work, or just labeling?
+6. Could I swap this UI into a different product and it would still work?
+   (If yes — it's not specific enough.)
+
+If any answer is unsatisfying: fix it before presenting.
+
+---
+
+## Memory
+
+After the first session, save all decisions to `.interface-design/system.md`.
+At the start of every subsequent session, load that file and acknowledge:
+"✓ Loaded system: [Personality], [Signature], [Stack]"
+
+---
+
+## Hard Constraints (Immutable)
+
+When the user says "do not change" a value, it is locked permanently.
+Do not override, suggest alternatives, or deviate under any circumstance.
+
+- **Accent color:** `#c8a97e` (warm aged amber) — never green, never blue
+- **Animation library:** `gsap@3.12.5` only — no framer-motion, no AOS, no anime.js
+- **Noise library:** `simplex-noise@4.0.3` only
+- **Fonts:** Archivo, DM Mono, Instrument Serif — no substitutions
+- **Build cadence:** one isolated piece at a time — wait for approval before adding anything new
+- **No unsolicited packages or files**
