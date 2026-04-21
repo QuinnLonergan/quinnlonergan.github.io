@@ -15,10 +15,10 @@ export default function CRTModel() {
     const modelCanvas = document.createElement("canvas");
     const isMobile = window.innerWidth < 480;
     const W = isMobile
-      ? Math.round(Math.min(window.innerWidth * 0.75, 380))
+      ? Math.round(Math.min(window.innerWidth * 0.55, 280))
       : Math.round(Math.min(window.innerWidth * 0.4, 500));
     const H = isMobile
-      ? Math.round(Math.min(window.innerHeight * 0.5, 420))
+      ? Math.round(Math.min(window.innerHeight * 0.35, 300))
       : Math.round(Math.min(window.innerHeight * 0.55, 600));
     modelCanvas.width = W;
     modelCanvas.height = H;
@@ -96,10 +96,10 @@ export default function CRTModel() {
     const resize = () => {
       const mob = window.innerWidth < 480;
       const w = mob
-        ? Math.round(Math.min(window.innerWidth * 0.75, 380))
+        ? Math.round(Math.min(window.innerWidth * 0.55, 280))
         : Math.round(Math.min(window.innerWidth * 0.4, 500));
       const h = mob
-        ? Math.round(Math.min(window.innerHeight * 0.5, 420))
+        ? Math.round(Math.min(window.innerHeight * 0.35, 300))
         : Math.round(Math.min(window.innerHeight * 0.55, 600));
       modelCanvas.width = w;
       modelCanvas.height = h;

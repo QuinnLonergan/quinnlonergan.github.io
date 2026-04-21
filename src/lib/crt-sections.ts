@@ -151,7 +151,7 @@ export class HeroSection implements CRTSection {
     let quoteBottom = quoteY;
     if (mobile) {
       const quoteMaxW = W - pad * 2;
-      const words = "Film background, engineering mind — code as craft.".split(" ");
+      const words = "Frontend focused, tech neophile, film lover.".split(" ");
       let line = "";
       let qy = quoteY;
       for (const word of words) {
@@ -186,7 +186,7 @@ export class HeroSection implements CRTSection {
     ctx.letterSpacing = "0px";
 
     if (modelCanvas && modelCanvas.width > 0) {
-      const scrollFade = 1 - Math.min(1, scrollY / (this.height * 0.6));
+      const scrollFade = mobile ? 1 : 1 - Math.min(1, scrollY / (this.height * 0.6));
       if (scrollFade > 0) {
         const mw = modelCanvas.width;
         const mh = modelCanvas.height;

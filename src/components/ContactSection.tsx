@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useCallback, FormEvent } from "react";
+import { useEffect, useRef, useCallback, useState, FormEvent } from "react";
+import { createPortal } from "react-dom";
 import type { ContactSection as ContactSectionType, FieldRect } from "@/lib/crt-contact-section";
 
-const FORMSPREE_ID = "YOUR_FORM_ID"; // Replace with your Formspree form ID
+const FORMSPREE_ID = "mkokqgpw";
 
 function applyRect(el: HTMLElement | null, r: FieldRect | undefined) {
   if (!el || !r) return;
@@ -20,12 +21,15 @@ export default function ContactSection() {
   const btnRef = useRef<HTMLButtonElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const rafRef = useRef<number>(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   const getSection = useCallback((): ContactSectionType | null => {
     const renderer = (window as any).__crtRenderer;
     if (!renderer) return null;
     for (const s of renderer.sections) {
-      if (s.constructor.name === "ContactSection") return s as ContactSectionType;
+      if ((s as any).kind === "contact") return s as ContactSectionType;
     }
     return null;
   }, []);
@@ -86,50 +90,54 @@ export default function ContactSection() {
     renderer?.markDirty();
   };
 
+  const formEl = (
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      style={{ position: "fixed", top: 0, left: 0, width: 0, height: 0, pointerEvents: "none", zIndex: 200 }}
+    >
+      <input
+        ref={nameRef}
+        name="name"
+        type="text"
+        required
+        autoComplete="name"
+        aria-label="Name"
+        style={fixedInput}
+      />
+      <input
+        ref={emailRef}
+        name="email"
+        type="email"
+        required
+        autoComplete="email"
+        aria-label="Email"
+        style={fixedInput}
+      />
+      <textarea
+        ref={messageRef}
+        name="message"
+        required
+        aria-label="Message"
+        style={fixedInput}
+      />
+      <button ref={btnRef} type="submit" style={{ ...fixedInput, cursor: "pointer" }}>
+        Send
+      </button>
+    </form>
+  );
+
   return (
     <>
       <section style={{ height: "60vh" }} aria-hidden="true" />
-
-      <form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        style={{ position: "fixed", top: 0, left: 0, width: 0, height: 0, pointerEvents: "none" }}
-      >
-        <input
-          ref={nameRef}
-          name="name"
-          type="text"
-          required
-          autoComplete="name"
-          aria-label="Name"
-          style={fixedInput}
-        />
-        <input
-          ref={emailRef}
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          aria-label="Email"
-          style={fixedInput}
-        />
-        <textarea
-          ref={messageRef}
-          name="message"
-          required
-          aria-label="Message"
-          style={fixedInput}
-        />
-        <button ref={btnRef} type="submit" style={{ ...fixedInput, cursor: "pointer" }}>
-          Send
-        </button>
-      </form>
+      {mounted && createPortal(formEl, document.body)}
     </>
   );
 }
 
 const fixedInput: React.CSSProperties = {
   position: "fixed",
+  zIndex: 200,
   background: "transparent",
   border: "none",
   outline: "none",

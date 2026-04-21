@@ -48,6 +48,7 @@ export class ProjectsSection implements CRTSection {
   private _onClick: ((e: MouseEvent) => void) | null = null;
   private _onMouseMove: ((e: MouseEvent) => void) | null = null;
   private hoveredChevron: "left" | "right" | null = null;
+  imageHit: { x: number; y: number; w: number; h: number; src: string } | null = null;
 
   constructor(projects: ProjectData[], yStart: number) {
     this.projects = projects;
@@ -69,9 +70,19 @@ export class ProjectsSection implements CRTSection {
     }
 
     this._onClick = (e: MouseEvent) => {
+      const mx = e.clientX, my = e.clientY;
+
+      // Mobile: tap image to open lightbox
+      const ih = this.imageHit;
+      if (ih && window.innerWidth < 480) {
+        if (mx >= ih.x && mx <= ih.x + ih.w && my >= ih.y && my <= ih.y + ih.h) {
+          window.dispatchEvent(new CustomEvent("crt:lightbox", { detail: { src: ih.src } }));
+          return;
+        }
+      }
+
       const h = this.chevronHits;
       if (!h) return;
-      const mx = e.clientX, my = e.clientY;
       const s = h.s;
       const imgCount = this.projects[h.pi].images.length;
       if (imgCount <= 1) return;
@@ -286,6 +297,9 @@ export class ProjectsSection implements CRTSection {
           s: chevSize + 10,
           pi,
         };
+        if (mobile) {
+          this.imageHit = { x: ix, y: iy, w: iw, h: ih, src: imgSrc };
+        }
       }
     }
 

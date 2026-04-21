@@ -21,6 +21,7 @@ export interface ContactLayout {
 }
 
 export class ContactSection implements CRTSection {
+  readonly kind = "contact";
   y: number;
   height: number;
 

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, DM_Mono, Instrument_Serif } from "next/font/google";
 import GrainOverlay from "@/components/GrainOverlay";
 import CustomCursor from "@/components/CustomCursor";
+import ImageLightbox from "@/components/ImageLightbox";
 import Header from "@/components/Header";
 import CRTFilter from "@/components/CRTFilter";
 import "./globals.css";
@@ -60,6 +61,7 @@ export default function RootLayout({
         <div className="vignette" aria-hidden="true" />
         <GrainOverlay />
         <CustomCursor />
+        <ImageLightbox />
       </body>
     </html>
   );
